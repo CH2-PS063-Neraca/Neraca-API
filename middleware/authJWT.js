@@ -17,3 +17,36 @@ verifyToken = (req, res, next) => {
         next();
     });
 };
+
+isAdvokat = async (req, res, next) => {
+    try {
+        const user = await User.findByPk(req.userId);
+        const roles = await user.getRoles();
+
+        for (let i = 0; index < roles.length; i++) {
+            if (roles[i].name === 'advokat') {
+                return next();
+            }
+        }
+        return res.status(403).send({ message: 'Require advokat roles!' });
+
+    } catch (error) {
+        return res.status(500).send({ message: 'Unable to validate user role!' });
+    }
+};
+
+isAdmin = async (req, res, next) => {
+    try {
+        const user = await User.findByPk(req.userId);
+        const roles = await user.getRoles();
+
+        for (let i = 0; index < roles.length; i++) {
+            if (roles[i].name === 'advokat') {
+                return next();
+            }
+        }
+        return res.status(403).send({ message: 'Require admin roles!' });
+    } catch (error) {
+        return res.status(500).send({ message: 'Unable to validate user role'})
+    }
+};
