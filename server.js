@@ -1,15 +1,20 @@
 const express = require('express');
+const dbConnect = require('./config/dbConnect');
+const authRouter = require('./routes/authRoute');
 const cors = require('cors');
-const cookieSession = require('cookie-session');
 const app = express();
 
 require('dotenv').config();
 const PORT = process.env.PORT || 8080;
 
-// parse request of content-type - application/json
-app.use(express.json());
+// Database Connection
+dbConnect();
+
+
 
 // Routes
+app.use('/api/user', authRouter);
+
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to Neraca Application' });
 });
