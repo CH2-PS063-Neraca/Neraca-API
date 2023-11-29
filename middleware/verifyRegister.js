@@ -31,4 +31,9 @@ const checkDuplicateEmail = async function(email) {
     }
 }
 
-module.exports = { checkDuplicateUsername, checkDuplicateEmail };
+
+
+module.exports = { 
+    checkDuplicateUsername,
+    checkDuplicateEmail,
+};
