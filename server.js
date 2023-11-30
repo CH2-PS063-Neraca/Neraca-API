@@ -12,8 +12,6 @@ require('dotenv').config();
 // Port Server
 const PORT = process.env.PORT || 8080;
 
-app.use(cors());
-
 // Database Connection
 async function initializeDatabase() {
     try {
@@ -30,6 +28,7 @@ async function initializeDatabase() {
 initializeDatabase();
 
 // Configuration
+app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -37,6 +36,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 // Routes
+require('./routes/authRoute')(app);
 require('./routes/userRoute')(app);
 
 app.get('/', (req, res) => {
