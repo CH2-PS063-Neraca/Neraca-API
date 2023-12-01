@@ -1,34 +1,34 @@
-const mongoose = require('mongoose'); // Erase if already required
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/dbConfig');
 
-// Declare the Schema of the Mongo model
-var userSchema = new mongoose.Schema({
-    firstname:{
-        type:String,
-        required:true,
-        unique:true,
-        index:true,
+const User = sequelize.define('user', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
     },
-    lastname:{
-        type:String,
-        required:true,
-        unique:true,
-        index:true,
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
     },
-    email:{
-        type:String,
-        required:true,
-        unique:true,
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+            isEmail: true,
+        },
     },
-    mobile:{
-        type:String,
-        required:true,
-        unique:true,
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false,
     },
-    password:{
-        type:String,
-        required:true,
+    confPassword: {
+        type: DataTypes.STRING,
+        allowNull: false,
     },
 });
 
-//Export the model
-module.exports = mongoose.model('User', userSchema);
+
+module.exports = User;
