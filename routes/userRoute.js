@@ -11,5 +11,5 @@ module.exports = function(app) {
     });
 
     app.get('/api/users', controller.getUsers);
-    app.post('/api/updatePassword', controller.updatePassword);
+    app.post('/api/updatePassword', controller.updateUserPassword);
 }
