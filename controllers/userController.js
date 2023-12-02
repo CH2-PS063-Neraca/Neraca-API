@@ -1,7 +1,10 @@
-const User = require('../models/userModels');
-const { updateFunction } = require('../middleware/updatePassword');
+const User = require('../models/userModels.js');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const sequelize = require('../config/dbConfig');
+const nodemailer = require('nodemailer');
 
+require('dotenv').config();
 
 /* ----------- Get User ------------- */
 exports.getUsers = async (req, res) => {
@@ -17,67 +20,137 @@ exports.getUsers = async (req, res) => {
         });
     }
 }
+
 /* -------- Update Password ------- */
 exports.updateUserPassword = async (req, res) => {
     const id = req.body.id;
-
     const { currentPassword, newPassword, confPassword } = req.body;
-    if (!currentPassword || !newPassword || !confPassword) {
-        return res.status(500).send({
-            status: 'Failed',
-            message: 'Semua field harus di isi'
-        })
-    }
-    if (newPassword !== confPassword) {
-        return res.status(500).send({
-            status: 'Failed',
-            message: 'Password tidak sesuai, silahkan periksa kembali password anda'
-        })
-    }
 
-    const user = await User.findOne({
-        id: id,
-    });
-    if (!user) {
-        return res.status(404).send({
-            status: 'Failed',
-            message: 'User tidak ditemukan'
-        })
-    }
-
-    const matchPassword = await bcrypt.compare(currentPassword, user.password);
-    if (!matchPassword) {
-        return res.status(500).send({
-            status: 'Failed',
-            message: 'Incorrect current password, please check your password'
-        })
-    }
-
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(newPassword, salt);
-
-    const updateUser = await User.update(
-        { password: hashedPassword},
-        {
-            where: {
-                id: id,
-            },
+    try {
+        const user = await User.findOne({
+            where: { id: id }
+        });
+        if (!user) {
+            return res.status(401).send({
+                status: 'Failed',
+                message: 'User tidak ditemukan'
+            });
         }
-    );
-    if (updateUser) {
-        return res.status(200).send({
+        const isMatch = await bcrypt.compare(currentPassword, user.password);
+        if (!isMatch) {
+            return res.status(401).send({
+                status: 'Failed',
+                message: 'Password tidak sesuai'
+            });
+        }
+        if (newPassword !== confPassword) {
+            return res.status(401).send({
+                status: 'Failed',
+                message: 'Konfirmasi password tidak sesuai'
+            });
+        }
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+        const hashedConfPassword = await bcrypt.hash(confPassword, salt);
+        
+        await User.update({
+            password: hashedPassword,
+            confPassword: hashedConfPassword
+        }, {
+            where: { id: id }
+        });
+
+        res.send({
             status: 'Success',
-            message: 'Update berhasil'
-        })
-    } else {
-        return res.status(500).send({
+            message: 'Password berhasil diubah'
+        });
+        
+    } catch (error) {
+        res.status(401).send({
             status: 'Failed',
-            message: 'Update gagal'
-        })
+            message: 'Terjadi kesalahan saat mengubah password'
+        });
     }
-};
+}
 
+/* --------- Forget Password ---------- */
+exports.forgotPassword = async (req, res) => {
+    const email = req.body.email;
 
-/* -------- Forgot Password ------- */
-/* -------- Update Profile -------- */
-/* -------- Get User Profile -------- */
+    try {
+        const user = await User.findOne({
+            where: { email: email }
+        });
+        if (!user) {
+            return res.status(401).send({
+                status: 'Failed',
+                message: 'Email tidak ditemukan'
+            });
+        }
+        const token = jwt.sign({ id: user.id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+
+        // Create a transport object
+        let transporter = nodemailer.createTransport({
+            service: 'gmail', // replace with your email provider
+            auth: {
+                user: process.env.EMAIL_USERNAME, // replace with your email username
+                pass: process.env.EMAIL_PASSWORD // replace with your email password
+            }
+        });
+
+        // Send an email
+        let info = await transporter.sendMail({
+            from: 'necaralawconsultant@gmail.com', // sender address
+            to: email, // list of receivers
+            subject: 'Password Reset', // Subject line
+            text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\nPlease click on the following link, or paste this into your browser to complete the process within one hour of receiving it:\n\n${link}\n\nIf you did not request this, please ignore this email and your password will remain unchanged.\n` // plain text body
+        });
+
+        res.send({
+            status: 'Success',
+            message: 'Link reset password berhasil dikirim',
+        });
+    } catch (error) {
+        res.status(401).send({
+            status: 'Failed',
+            message: 'Terjadi kesalahan saat mengirim link reset password'
+        });
+    }
+}
+
+/* --------- Update Profile ----------- */
+exports.updateProfile = async (req, res) => {
+    const id = req.body.id;
+    const { phone, tanggal_lahir, alamat, jenis_kelamin } = req.body;
+
+    try {
+        const user = await User.findOne({
+            where: { id: id }
+        });
+
+        if (!user) {
+            return res.status(401).send({
+                status: 'Failed',
+                message: 'User tidak ditemukan'
+            });
+        }
+        await User.update({
+            phone: phone,
+            tanggal_lahir: tanggal_lahir,
+            alamat: alamat,
+            jenis_kelamin: jenis_kelamin
+        }, {
+            where: { id: id }
+        });
+
+        res.send({
+            status: 'Success',
+            message: 'Profile berhasil diubah'
+        });
+    } catch (error) {
+        res.status(401).send({
+            status: 'Failed',
+            message: 'Terjadi kesalahan saat mengubah profile'
+        });
+    }
+}
