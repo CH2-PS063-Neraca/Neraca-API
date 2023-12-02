@@ -12,4 +12,6 @@ module.exports = function(app) {
 
     app.get('/api/users', controller.getUsers);
     app.post('/api/updatePassword', controller.updateUserPassword);
+    app.post('/api/forgotPassword', controller.forgotPassword);
+    app.post('/api/updateProfile', controller.updateProfile);
 }
