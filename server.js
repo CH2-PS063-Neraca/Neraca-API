@@ -4,13 +4,21 @@ const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser')
 const sequelize = require('./config/dbConfig');
+
+// Models
 const User = require('./models/userModels');
+const Advokat = require('./models/advokatModels');
+const firmLaw = require('./models/lawFirmModels');
 
 const app = express();
 require('dotenv').config();
 
 // Port Server
 const PORT = process.env.PORT || 8080;
+
+// Body Parser 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Database Connection
 async function initializeDatabase() {
@@ -29,15 +37,19 @@ initializeDatabase();
 
 // Configuration
 app.use(cors());
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.json());
+
 
 
 // Routes
 require('./routes/authRoute')(app);
 require('./routes/userRoute')(app);
+
+// Router Advocat
+require('./routes/advocatAuthRoute')(app);
+require('./routes/advocatUserRoute')(app);
 
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to Neraca Application' });
