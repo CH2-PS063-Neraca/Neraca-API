@@ -43,13 +43,16 @@ app.use(express.json());
 
 
 
-// Routes
+// Routes User
 require('./routes/authRoute')(app);
 require('./routes/userRoute')(app);
 
 // Router Advocat
 require('./routes/advocatAuthRoute')(app);
 require('./routes/advocatUserRoute')(app);
+
+// Router Law Firm
+require('./routes/lawfirmRoute')(app);
 
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to Neraca Application' });
