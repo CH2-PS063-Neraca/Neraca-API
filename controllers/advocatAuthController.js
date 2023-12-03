@@ -121,7 +121,7 @@ exports.loginAdvocat = async(req, res) => {
     }
 }
 
-/* --------- Logout Advocat ---------- */
+/* ---------- Logout Advocat ---------- */
 exports.logoutAdvocat = async(req, res) => {
     try {
         res.cookie('jwt', '', { maxAge: 1 });
