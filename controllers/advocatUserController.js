@@ -2,6 +2,7 @@ const Advokat = require('../models/advokatModels');
 const sequelize = require('../config/dbConfig');
 const bcrypt = require('bcryptjs');
 const User = require('../models/userModels');
+const nodemailer = require('nodemailer');
 
 
 require('dotenv').config();
@@ -67,6 +68,51 @@ exports.updatePassword = async(req, res) => {
         return res.status(401).send({
             status: 'Failed',
             message: 'Terjadi kesalahan saat mengubah password'
+        });
+    }
+}
+
+exports.forgotPassword = async(req, res) => {
+    const email = req.body.email;
+
+    try {
+        const advokat = await Advokat.findOne({
+            where: { email: email }
+        });
+        if (!advokat) {
+            return res.status(401).send({
+                status: 'Failed',
+                message: 'Email tidak ditemukan'
+            });
+        }
+        
+        const token = jwt.sign({ id: advokat.id }, process.env.ACCESS_TOKEN_SECRET, {
+            expiresIn: '24h'
+        });
+
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USERNAME,
+                pass: process.env.EMAIL_PASSWORD
+            }
+        });
+
+        let info = await transporter.sendMail({
+            from: "neracalawconsultant",
+            to: email,
+            subject: "Reset Password",
+            text: "Klik link berikut untuk mereset password anda",
+        });
+
+        res.send({
+            status: 'Success',
+            message: 'Link reset password telah dikirim ke email anda'
+        });
+    } catch (error) {
+        res.status(401).send({
+            status: 'Failed',
+            message: 'Terjadi kesalahan saat mengirim link reset password'
         });
     }
 }
