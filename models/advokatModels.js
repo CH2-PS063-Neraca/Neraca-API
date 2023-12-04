@@ -21,7 +21,6 @@ const Advokat = sequelize.define('advokat', {
     },
     confPassword: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
     firma: {
         type: DataTypes.STRING,
