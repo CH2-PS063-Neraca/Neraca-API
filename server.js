@@ -14,7 +14,7 @@ const app = express();
 require('dotenv').config();
 
 // Port Server
-const PORT = process.env.PORT || 3030;
+const port = process.env.PORT || 3030;
 
 // Body Parser 
 app.use(bodyParser.json());
@@ -60,6 +60,6 @@ app.get('/', (req, res) => {
 
 
 // Listening PORT
-app.listen(PORT, () => {
-    console.log(`Server listening on http://localhost:${PORT}`);
+app.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
 });
