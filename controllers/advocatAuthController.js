@@ -32,7 +32,6 @@ exports.registerAdvocat = async(req, res) => {
 
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(password, salt);
-        const hashedConfPassword = await bcrypt.hash(confPassword, salt);
 
         if (!nama || !email || !password || !confPassword) {
             return res.status(500).send({
@@ -45,7 +44,6 @@ exports.registerAdvocat = async(req, res) => {
             nama: nama,
             email: email,
             password: hashedPassword,
-            confPassword: hashedConfPassword,
             firma: firma,
             pengalaman: pengalaman,
             keahlian: keahlian,
