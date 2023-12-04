@@ -1,19 +1,35 @@
 30 November 2023 START
     - API Login
     - APi User Controller
-        * getUsers
-        * updatePassword
-        * updateProfile
-        * forgotPassword
-        * getUserProfile
+        * getUsers => SELESAI
+        * updatePassword => SELESAI
+        * updateProfile => SELESAI
+        * forgotPassword => SELESAI
+        * getUserProfile => SELESAI
 6 Desember 2023 DEADLINE
 
-QUESTIONS :
+2 Desember 2023
+    - API Advokat 
+    - Database Advokat 
+    - Get Profile Advokat 
 
-* BAGAIMANA CARA MENENTUKAN HARGA YANG TERBAIK
-* APAKAH APLIKASI INI COCOK UNTUK DIBUAT BISNIS, BAGAIMANA BISNIS PLAN NYA ?
-* HAL APA YANG BISA MENARIK PENGGUNA AGAR BISA MEMILIH APLIKASI KITA 
-* APAKAH ADA SARAN FITUR UNTUK PROSES BISNIS DARI APLIKASI INI ?
-* APAKAH ADA FITUR BUNDLE YANG COCOK AGAR MASYARAKAT LEBIH TERTARIK ?
-* CARA MENARIK KEPERCAYAAN PENGGUNA ?
-* APAKAH BPK BISA MELIHAT SEBUAH POTENSI BISNIS DARI APLIKASI YANG SEDANG SAYA KERJAKAN, JIKA TIDAK BISAKAH BAPAK MENJELASKAN KEKURANGAN NYA ?
+Advokat 
+    - Nama Advokat
+    - Nama Firma
+    - Nomor member 
+    - Pengalaman
+    - Rating 
+    - Biografi 
+    - Riwayat kasus 
+    - Pendidikan Hukum
+    - Lokasi 
+
+Fitur Search 
+    - Input search 
+    - Rekomendasi Advokat
+
+    - DELETE USER 
+    -ADMIN ROLE
+    - CI/CD
+    - CATEGORY TABLE 
+    - LIBRARY 

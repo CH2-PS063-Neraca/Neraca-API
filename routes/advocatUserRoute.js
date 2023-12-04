@@ -10,6 +10,8 @@ module.exports = function(app) {
         next();
     });
 
-    app.get('/api/getAdvocat', controller.getAllAdvokat);
-    app.post('/api/updatePasswordAdvokat', controller.updatePassword)
+    app.get('/api/advocat/get-advocat', controller.getAllAdvokat);
+    app.post('/api/advocat/update-password', controller.updatePassword)
+    app.post('/api/advocat/forgot-password', controller.forgotPassword);
+    app.delete('/api/advocat/delete', controller.deleteAdvokat);
 }

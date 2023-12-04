@@ -3,6 +3,7 @@ const sequelize = require('../config/dbConfig');
 const bcrypt = require('bcryptjs');
 const User = require('../models/userModels');
 const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
 
 
 require('dotenv').config();
@@ -113,6 +114,35 @@ exports.forgotPassword = async(req, res) => {
         res.status(401).send({
             status: 'Failed',
             message: 'Terjadi kesalahan saat mengirim link reset password'
+        });
+    }
+}
+
+exports.deleteAdvokat = async(req, res) => {
+    const id = req.body.id;
+
+    try {
+        const advokat = await Advokat.findOne({
+            where: { id: id }
+        });
+        if (!advokat) {
+            return res.status(401).send({
+                status: 'Failed',
+                message: 'Advokat tidak ditemukan'
+            });
+        }
+        await Advokat.destroy({
+            where: { id: id }
+        });
+        res.send({
+            status: 'Success',
+            message: 'Advokat berhasil dihapus'
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(401).send({
+            status: 'Failed',
+            message: 'Terjadi kesalahan saat menghapus advokat'
         });
     }
 }

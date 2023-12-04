@@ -154,3 +154,32 @@ exports.updateProfile = async (req, res) => {
         });
     }
 }
+
+exports.deleteUser = async (req, res) => {
+    const id = req.body.id;
+
+    try {
+        const user = await User.findOne({
+            where: { id: id }
+        });
+        if (!user) {
+            return res.status(401).send({
+                status: 'Failed',
+                message: 'User tidak ditemukan'
+            });
+        }
+        await User.destroy({
+            where: { id: id }
+        });
+
+        res.send({
+            status: 'Success',
+            message: 'User berhasil dihapus'
+        });
+    } catch (error) {
+        res.status(401).send({
+            status: 'Failed',
+            message: 'Terjadi kesalahan saat menghapus user'
+        });
+    }
+}
