@@ -14,7 +14,7 @@ const app = express();
 require('dotenv').config();
 
 // Port Server
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3030;
 
 // Body Parser 
 app.use(bodyParser.json());
