@@ -10,7 +10,7 @@ module.exports = function(app) {
         next();
     });
 
-    app.post('/api/registerAdvocat', controller.registerAdvocat);
-    app.post('/api/loginAdvocat', controller.loginAdvocat);
-    app.post('/api/logoutAdvocat', controller.logoutAdvocat);
+    app.post('/api/advocat/register', controller.registerAdvocat);
+    app.post('/api/advocat/login', controller.loginAdvocat);
+    app.post('/api/advocat/logout', controller.logoutAdvocat);
 }
