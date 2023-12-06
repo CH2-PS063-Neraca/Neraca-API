@@ -11,9 +11,9 @@ module.exports = function(app) {
     });
     
     app.get('/api/firm-law/getFirm', controller.getFirm);
-    app.post('/api/firm-law/create', controller.createFirm);
-    app.put('/api/firm-law/edit-firm/:id', controller.editFirm);
-    app.delete('/api/firm-law/delete-firm/:id', controller.deleteFirm);
+    // app.post('/api/firm-law/create', controller.createFirm);
+    // app.put('/api/firm-law/edit-firm/:id', controller.editFirm);
+    // app.delete('/api/firm-law/delete-firm/:id', controller.deleteFirm);
     
     // app.get('/api/getFirm/:id', controller.getFirmById);
     // app.get('/api/getFirm/:nama_firm', controller.getFirmByNama);

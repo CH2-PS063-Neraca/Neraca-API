@@ -1,5 +1,5 @@
 const express = require('express');
-const controller = require('../controllers/advocatUserController');
+const controller = require('../controllers/advocatController');
 
 module.exports = function(app) {
     app.use(function(req, res, next) {

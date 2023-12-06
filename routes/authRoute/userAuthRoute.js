@@ -1,5 +1,5 @@
 const express = require('express');
-const controller = require('../controllers/authController');
+const controller = require('../../controllers/auth/userAuth');
 
 module.exports = function(app) {
     app.use(function(req, res, next) {
