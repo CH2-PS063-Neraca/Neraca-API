@@ -44,15 +44,19 @@ app.use(express.json());
 
 
 // Routes User
-require('./routes/authRoute')(app);
+require('./routes/authRoute/userAuthRoute')(app);
 require('./routes/userRoute')(app);
 
 // Router Advocat
-require('./routes/advocatAuthRoute')(app);
+require('./routes/authRoute/advocatAuthRoute')(app);
 require('./routes/advocatUserRoute')(app);
 
 // Router Law Firm
 require('./routes/lawfirmRoute')(app);
+
+// Admin Router
+require('./routes/authRoute/adminAuthRoute')(app);
+require('./routes/adminRoute')(app);
 
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to Neraca Application' });
