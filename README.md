@@ -50,6 +50,8 @@ GET ({host})/api/user/users
   "email": "user@example.com"
 }
 ```
+These endpoints are used to display all users who have registered
+
 * Show profile users
 ```
 GET ({host})/api/user/profile
@@ -65,3 +67,4 @@ GET ({host})/api/user/profile
   "pronoun": "male"
 }
 ```
+These endpoints are used to display the profile of the user
