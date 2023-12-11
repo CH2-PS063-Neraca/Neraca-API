@@ -15,3 +15,34 @@ The API consists of four main endpoints that provide different functions:
 1. Authentication/Authorization APIs
 2. Users APIs
 3. Advocat APIs
+
+# Getting Started
+
+1. Clone this repository
+```
+git clone https://github.com/CH2-PS063-Neraca/Neraca-API.git
+```
+2. Install Depedencies
+```
+npm i express bcryptjs body-parser  cookie-parser cookie-session cors dotenv jsonwebtoken mysql2 nodemailer sequelize nodemon googleapis
+```
+
+## Authentication/Authorization 
+These endpoints allow users to authenticate themselves and obtain authorization to access other endpoints. The API implements token-based authentication using JSON Web Tokens (JWT) to ensure secure communication between the client and server.
+
+#### Base URL
+
+Link app : ....
+
+#### Method :
+> GET
+
+* Show all users
+```
+GET ({host})/api/auth/users
+```
+
+#### Response : 
+```
+None
+```
