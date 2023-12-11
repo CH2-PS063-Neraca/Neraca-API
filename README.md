@@ -39,10 +39,29 @@ Link app : ....
 
 * Show all users
 ```
-GET ({host})/api/auth/users
+GET ({host})/api/user/users
 ```
 
 #### Response : 
 ```
-None
+{
+  "id": "1",
+  "username": "user",
+  "email": "user@example.com"
+}
+```
+* Show profile users
+```
+GET ({host})/api/user/profile
+```
+#### Response :
+```
+{
+  "username": "user",
+  "email": "user@example.com",
+  "phone": "number",
+  "brithday-date": "date",
+  "address": "user address",
+  "pronoun": "male"
+}
 ```
