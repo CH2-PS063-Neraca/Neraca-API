@@ -50,7 +50,7 @@ GET ({host})/api/user/users
   "email": "user@example.com"
 }
 ```
-These endpoints are used to display all users who have registered
+These endpoints are used to display all users who have registered.
 
 * Show profile users
 ```
@@ -67,4 +67,62 @@ GET ({host})/api/user/profile
   "pronoun": "male"
 }
 ```
-These endpoints are used to display the profile of the user
+These endpoints are used to display the profile of the user.
+
+### Method :
+> POST
+
+* Register User
+```
+POST ({host})/api/auth/register
+```
+in the body of the request, copy this code as an example : 
+```
+{
+  "username": "user username",
+  "email": "user@example.com",
+  "password": "password user",
+  "confPassword": "confirm password user"
+}
+```
+
+#### Response : 
+```
+{
+  "status": "Success",
+  "message": "Anda berhasil registrasi"
+}
+```
+These endpoints are used for users to register to our application.
+
+* Login User
+```
+POST ({host})/api/auth/login
+```
+in the body of the request, copy this code as an example :
+```
+{
+  "email": "user@example.com",
+  "password": "userpassword"
+}
+```
+#### Response : 
+```
+{
+  "status": "Success",
+  "message": "Anda berhasil login"
+}
+```
+These endpoints are used for user login into the application.
+
+* Logout User
+```
+POST ({host})/api/auth/logout
+```
+#### Response : 
+```
+{
+  "status": "Success",
+  "message": "Anda berhasil logout"
+}
+```
