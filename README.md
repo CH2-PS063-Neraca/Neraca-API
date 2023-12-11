@@ -13,4 +13,5 @@ Neraca is a legal service application to help people fight for their rights in c
 The API consists of four main endpoints that provide different functions:
 
 1. Authentication/Authorization APIs
-2. Advocat APIs
+2. Users APIs
+3. Advocat APIs
