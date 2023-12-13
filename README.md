@@ -54,7 +54,7 @@ These endpoints are used to display all users who have registered.
 
 * Show profile users
 ```
-GET ({host})/api/user/profile
+GET ({host})/api/user/profile/:id
 ```
 #### Response :
 ```
@@ -62,12 +62,57 @@ GET ({host})/api/user/profile
   "username": "user",
   "email": "user@example.com",
   "phone": "number",
-  "brithday-date": "date",
-  "address": "user address",
-  "pronoun": "male"
 }
 ```
 These endpoints are used to display the profile of the user.
+
+* Show profile setting
+```
+GET ({host})/api/user/profile-setting/:id
+```
+#### Response : 
+```
+{
+  "email": "user-email",
+  "phone": "no-user",
+  "password": "password-user"
+}
+```
+
+* Update user email
+```
+POST ({host})/api/user/update-email/:id
+```
+in the body of the request, copy this code as an example : 
+```
+{
+  "email": "new-email-user"
+}
+```
+
+#### Response : 
+```
+{
+  "status": "Success",
+  "message": "Email berhasil diubah"
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Method :
 > POST
@@ -126,3 +171,6 @@ POST ({host})/api/auth/logout
   "message": "Anda berhasil logout"
 }
 ```
+These endpoints are used by users to exit the application
+
+* 
