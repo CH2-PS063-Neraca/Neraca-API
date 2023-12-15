@@ -21,18 +21,6 @@ exports.register = async (req, res) =>{
             })
         }
 
-        const checkUsername = await User.findOne({
-            where: {
-                username,
-            }
-        });
-        if (checkUsername) {
-            return res.status(500).send({
-                status: 'Failed',
-                message: 'Username sudah digunakan'
-            })
-        }
-
         if (password !== confPassword) {
             return res.status(500).send({
                 status: 'Failed',

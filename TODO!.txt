@@ -33,3 +33,12 @@ Fitur Search
     - CI/CD
     - CATEGORY TABLE 
     - LIBRARY 
+
+LOGIN BY GOOGLE : 
+
+    - setup di google cloud 
+    - back to vscode
+    - npm i googleapis
+    - add google client id + google client secret on .env
+
+IMPLEMENT MAPS API FOR TRACK USER : 

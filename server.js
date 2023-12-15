@@ -36,7 +36,7 @@ async function initializeDatabase() {
 initializeDatabase();
 
 // Configuration
-app.use(cors());
+app.use(cors({ credentials: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.json());

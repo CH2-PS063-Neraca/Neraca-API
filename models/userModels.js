@@ -10,7 +10,6 @@ const User = sequelize.define('users', {
     username: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
     },
     email: {
         type: DataTypes.STRING,
@@ -29,18 +28,6 @@ const User = sequelize.define('users', {
         allowNull: false,
     },
     phone: {
-        type: DataTypes.STRING,
-    },
-    tanggal_lahir: {
-        type: DataTypes.DATEONLY,
-    },
-    alamat: {
-        type: DataTypes.STRING,
-    },
-    foto: {
-        type: DataTypes.STRING,
-    },
-    jenis_kelamin: {
         type: DataTypes.STRING,
     },
 });

@@ -21,6 +21,128 @@ exports.getUsers = async (req, res) => {
     }
 }
 
+/* ----------- Get User Profile ----------- */
+exports.getUserProfile = async (req, res) => {
+   const id = req.params.id;
+
+   try {
+    const user = await User.findOne({
+        where: { id: id },
+        attributes: ['email', 'phone']
+    });
+    if (!user) {
+        return res.status(401).send({
+            status: 'Failed',
+            message: 'User tidak ditemukan'
+        });
+    }
+    res.send(user);
+   } catch (error) {
+        console.log(error);
+        res.status(401).send({
+            status: 'Failed',
+            message: 'Terjadi kesalahan mendapatkan profile user'
+        });
+   }
+}
+
+/* --------- Get user profile setting --------- */
+exports.getUserProfileSetting = async (req, res) => {
+    const id = req.params.id;
+
+   try {
+    const user = await User.findOne({
+        where: { id: id },
+        attributes: ['email', 'phone', 'password']
+    });
+    if (!user) {
+        return res.status(401).send({
+            status: 'Failed',
+            message: 'User tidak ditemukan'
+        });
+    }
+    res.send(user);
+
+   } catch (error) {
+        console.log(error);
+        res.status(401).send({
+            status: 'Failed',
+            message: 'Terjadi kesalahan mendapatkan profile user'
+        });
+   }
+}
+
+/* ------------ Update email user -------------  */
+exports.updateUserEmail = async (req, res) => {
+    const id = req.params.id;
+    const { email } = req.body;
+
+    try {
+        const user = await User.findOne({
+            where: { id: id }
+        });
+        if (!user) {
+            return res.status(401).send({
+                status: 'Failed',
+                message: 'User tidak ditemukan'
+            });
+        }
+
+        await User.update({
+            email: email
+        }, {
+            where: { id: id }
+        });
+
+        res.send({
+            status: 'Success',
+            message: 'Email berhasil diubah'
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(401).send({
+            status: 'Failed',
+            message: 'Terjadi kesalahan saat mengubah email'
+        });
+    }
+}
+
+/* --------- Update phone number ---------- */
+exports.updateUserPhone = async (req, res) => {
+    const id = req.params.id;
+    const { phone } = req.body;
+
+    try {
+        const user = await User.findOne({
+            where: { id: id }
+        });
+        if (!user) {
+            return res.status(401).send({
+                status: 'Failed',
+                message: 'User tidak ditemukan'
+            });
+        }
+
+        await User.update({
+            phone: phone
+        }, {
+            where: { id: id }
+        });
+
+        res.send({
+            status: 'Success',
+            message: 'Phone berhasil diubah'
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(401).send({
+            status: 'Failed',
+            message: 'Terjadi kesalahan saat mengubah nomor hp'
+        });
+    }
+}
+
 /* -------- Update Password ------- */
 exports.updateUserPassword = async (req, res) => {
     const id = req.body.id;
