@@ -83,62 +83,36 @@ exports.signIn = async (req, res) => {
             }
         });
 
-        if (!user || user.length === 0) {
-            return res.status(401).json({
+        if (!user) {
+            return res.status(400).json({
                 status: 'Failed',
-                message: 'User not found'
+                message: 'User tidak ditemukan'
             });
         }
 
         const match = await bcrypt.compare(req.body.password, user[0].password);
 
         if (!match) {
-            return res.status(401).json({
+            return res.status(400).json({
                 status: 'Failed',
-                message: 'Password yang anda masukkan salah'
+                message: 'Password tidak sesuai'
             });
         }
-        if (match) {
-            return res.status(200).json({
-                status: 'Success',
-                message: 'Anda berhasil login'
-            })
-        }
 
-        const id = user[0].id;
-        const name = user[0].username;
-        const mail = user[0].email;
-
-        const accessToken = jwt.sign({ id, name, mail }, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: '24h',
-        });
-        const refreshToken = jwt.sign({ id, name, mail }, process.env.REFRESH_TOKEN_SECRET, {
-            expiresIn: '24h',
+        const token = jwt.sign({ id: user[0].id }, process.env.ACCESS_TOKEN_SECRET, {
+            expiresIn: '1h'
         });
 
-        const userUpdate = await User.update(
-            { refresh_token: refreshToken },
-            {
-                where: {
-                    id: id,
-                }
+        return res.status(200).json({
+            message: 'Success',
+            loginResult: {
+                id: user[0].id,
+                username: user[0].username,
+                email: user[0].email,
+                token: token
             }
-        );
+        });
 
-        if (userUpdate) {
-            return res.json({
-                accessToken: accessToken,
-                refreshToken: refreshToken,
-                id: id,
-                name: name,
-                mail: email,
-            });
-        } else {
-            return res.status(500).json({
-                status: 'Failed',
-                message: 'Server internal error'
-            });
-        }
     } catch (error) {
         console.error(error);
         return res.status(500).json({
