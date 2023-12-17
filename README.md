@@ -295,9 +295,33 @@ In the body of the request, copy this code as an example :
 ```
 POST ({host})/api/advocat/login
 ```
+In the body of the request, copy this code as an example :
+```
+{
+    "email": "advocat@example.com",
+    "password": "advocatPassword"
+}
+```
 #### Response : 
 ```
-None
+{
+    "status": "Success",
+    "message": "Login berhasil",
+    "data": {
+        "id": 1,
+        "nama": "advocat-user",
+        "email": "advocat@example.com",
+        "password": "advocat-password",
+        "pengalaman": "Pidana, Penceraian",
+        "biografi": "none",
+        "pendidikan": "none",
+        "lokasi": "Tasikmalaya",
+        "harga_konsultasi_chat": 149000,
+        "harga_konsultasi_video": 169000,
+        "harga_konsultasi_tatap_muka": null
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyODIxMzE1LCJleHAiOjE3MDI5MDc3MTV9.EDpPxyeOeb_T_hQiVr11p43leCgwsNd5vQB4AF9CJ1U"
+}
 ```
 
 * Advocat logout
@@ -306,7 +330,10 @@ POST ({host})/api/advocat/logout
 ```
 #### Response :
 ```
-None
+{
+    "status": "Success",
+    "message": "Logout berhasil"
+}
 ```
 
 * Update password advocat
