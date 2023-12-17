@@ -223,7 +223,25 @@ GET ({host})/api/advocat/get-advocat
 ```
 #### Response : 
 ```
-None
+{
+    "status": "Success",
+    "message": "Advokat berhasil di dapatkan",
+    "data": [
+        {
+            "id": 1,
+            "nama": "advocat-user",
+            "email": "advocat@example.com",
+            "password": "advocat-password",
+            "pengalaman": "Pidana, Penceraian",
+            "biografi": "none",
+            "pendidikan": "none",
+            "lokasi": "Tasikmalaya",
+            "harga_konsultasi_chat": 149000,
+            "harga_konsultasi_video": 169000,
+            "harga_konsultasi_tatap_muka": null
+        }
+    ]
+}
 ```
 
 
