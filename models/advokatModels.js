@@ -19,25 +19,10 @@ const Advokat = sequelize.define('advokat', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    confPassword: {
-        type: DataTypes.STRING,
-    },
-    firma: {
-        type: DataTypes.STRING,
-    },
     pengalaman: {
         type: DataTypes.STRING,
     },
-    keahlian: {
-        type: DataTypes.STRING,
-    },
-    biografy: {
-        type: DataTypes.STRING,
-    },
-    foto: {
-        type: DataTypes.STRING,
-    },
-    riwayat_kasus: {
+    biografi: {
         type: DataTypes.STRING,
     },
     pendidikan: {
@@ -45,6 +30,15 @@ const Advokat = sequelize.define('advokat', {
     },
     lokasi: {
         type: DataTypes.STRING,
+    },
+    harga_konsultasi_chat: {
+        type: DataTypes.INTEGER,
+    },
+    harga_konsultasi_video: {
+        type: DataTypes.INTEGER,
+    },
+    harga_konsultasi_tatap_muka: {
+        type: DataTypes.INTEGER,
     },
 });
 

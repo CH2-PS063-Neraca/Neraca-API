@@ -7,7 +7,7 @@ require('dotenv').config();
 
 /* --------- Register Advocat ---------- */
 exports.registerAdvocat = async(req, res) => {
-    const { nama, email, password, confPassword, firma, pengalaman, keahlian, biografy, foto, riwayat_kasus, pendidikan, lokasi } = req.body;
+    const { nama, email, password, pengalaman, biografi, pendidikan, lokasi, harga_konsultasi_chat, harga_konsultasi_video, harga_konsultasi_tatap_muka } = req.body;
 
     try {
         const checkEmail = await Advocat.findOne({
@@ -21,19 +21,11 @@ exports.registerAdvocat = async(req, res) => {
                 message: 'Email sudah digunakan'
             })
         }
-        
-        if (password !== confPassword) {
-            return res.status(500).send({
-                status: 'Failed',
-                message: 'Password tidak sesuai, silahkan cek kembali password yang anda masukkan'
-            });
-            
-        }
 
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        if (!nama || !email || !password || !confPassword) {
+        if (!nama || !email || !password ) {
             return res.status(500).send({
                 status: 'Failed',
                 message: 'Semua data harus di isi'
@@ -44,14 +36,13 @@ exports.registerAdvocat = async(req, res) => {
             nama: nama,
             email: email,
             password: hashedPassword,
-            firma: firma,
             pengalaman: pengalaman,
-            keahlian: keahlian,
-            biografy: biografy,
-            foto: foto,
-            riwayat_kasus: riwayat_kasus,
-            pendidiikan: pendidikan,
-            lokasi: lokasi
+            biografi: biografi,
+            pendidikan: pendidikan,
+            lokasi: lokasi,
+            harga_konsultasi_chat: harga_konsultasi_chat,
+            harga_konsultasi_video: harga_konsultasi_video,
+            harga_konsultasi_tatap_muka: harga_konsultasi_tatap_muka
         });
 
         const token = jwt.sign({ id: newAdvocat.id }, process.env.ACCESS_TOKEN_SECRET, {
