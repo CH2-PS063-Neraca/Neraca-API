@@ -234,6 +234,21 @@ None
 ```
 POST ({host})/api/advocat/register
 ```
+In the body of the request, copy this code as an example :
+```
+{
+  "nama": "advocat-name",
+  "email": "advocat-email",
+  "password": "password",
+  "pendidikan": "",
+  "biografi": "",
+  "lokasi": "",
+  "pengalaman": "",
+  "harga_konsultasi_chat": "",
+  "harga_konsultasi_videocall": "",
+  "harga_konsultasi_facetoface": ""
+}
+```
 #### Response : 
 ```
 None
