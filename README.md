@@ -251,7 +251,26 @@ In the body of the request, copy this code as an example :
 ```
 #### Response : 
 ```
-None
+{
+    "status": "Success",
+    "message": "Login berhasil",
+    "data": {
+        "id": 1,
+        "nama": "advocat name",
+        "email": "advocat@example.com",
+        "password": "password",
+        "pengalaman": "Pidana, Penceraian",
+        "biografi": "none",
+        "pendidikan": "none",
+        "lokasi": "Tasikmalaya",
+        "harga_konsultasi_chat": 149000,
+        "harga_konsultasi_video": 169000,
+        "harga_konsultasi_tatap_muka": null,
+        "createdAt": "2023-12-17T12:33:02.000Z",
+        "updatedAt": "2023-12-17T12:33:02.000Z"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyODE2NTY3LCJleHAiOjE3MDI5MDI5Njd9.LkjCW5ofc90ik_lFr0cLkcTAohjZ9sxypVkBRmtFi_U"
+}
 ```
 
 * Advocat login
