@@ -79,37 +79,6 @@ GET ({host})/api/user/profile-setting/:id
 }
 ```
 
-* Update user email
-```
-POST ({host})/api/user/update-email/:id
-```
-in the body of the request, copy this code as an example : 
-```
-{
-  "email": "new-email-user"
-}
-```
-
-#### Response : 
-```
-{
-  "status": "Success",
-  "message": "Email berhasil diubah"
-}
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -173,4 +142,72 @@ POST ({host})/api/auth/logout
 ```
 These endpoints are used by users to exit the application
 
-* 
+
+* Update user email
+```
+POST ({host})/api/user/update-email/:id
+```
+in the body of the request, copy this code as an example : 
+```
+{
+  "email": "new-email-user"
+}
+```
+
+#### Response : 
+```
+{
+  "status": "Success",
+  "message": "Email berhasil diubah"
+}
+```
+
+* Update user phone number
+```
+POST ({host})/api/user/update-phone/:id
+```
+In the body of the request, copy this code as an example :
+```
+{
+  "phone": "new number phone user"
+}
+```
+
+#### Response :
+```
+{
+  "status": "Success",
+  "message": "Phone berhasil diubah"
+}
+```
+
+* Update user password
+```
+POST ({host})/api/user/update-password
+```
+In the body of the request, copy this code as an example :
+```
+{
+  "currentPassword": "123",
+  "newPassword": "321",
+  "confPassword": "321"
+}
+```
+#### Response :
+```
+{
+  "status": "Success",
+  "message": "Password berhasil diubah"
+}
+```
+
+* Forgot password user
+```
+POST ({host})/api/user/forgot-password
+```
+In the body of the request, copy this code as an example :
+```
+{
+  "email": "useremail@example.com"
+}
+```
