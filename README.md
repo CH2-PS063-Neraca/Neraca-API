@@ -32,6 +32,8 @@ These endpoints allow users to authenticate themselves and obtain authorization 
 
 #### Base URL
 
+## USER API
+
 Link app : ....
 
 #### Method :
@@ -80,10 +82,7 @@ GET ({host})/api/user/profile-setting/:id
 ```
 
 
-
-
-
-### Method :
+#### Method :
 > POST
 
 * Register User
@@ -211,3 +210,81 @@ In the body of the request, copy this code as an example :
   "email": "useremail@example.com"
 }
 ```
+
+## ADVOCAT API 
+
+
+#### Method :
+> GET
+
+* Show advocat
+```
+GET ({host})/api/advocat/get-advocat
+```
+#### Response : 
+```
+None
+```
+
+
+#### Method :
+> POST
+
+* Register advocat
+```
+POST ({host})/api/advocat/register
+```
+#### Response : 
+```
+None
+```
+
+* Advocat login
+```
+POST ({host})/api/advocat/login
+```
+#### Response : 
+```
+None
+```
+
+* Advocat logout
+```
+POST ({host})/api/advocat/logout
+```
+#### Response :
+```
+None
+```
+
+* Update password advocat
+```
+POST ({host})/api/advocat/update-password
+```
+#### Response : 
+```
+None
+```
+
+* Forgot password advocat
+```
+POST ({host})/api/advocat/forgot-password
+```
+#### Response : 
+```
+None
+```
+
+
+#### Method : 
+> DELETE
+
+* Delete advocat user
+```
+DELETE ({host})/api/advocat/delete
+```
+#### Response : 
+```
+None
+```
+
