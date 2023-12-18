@@ -7,7 +7,7 @@ require('dotenv').config();
 
 /* --------- Register Advocat ---------- */
 exports.registerAdvocat = async(req, res) => {
-    const { nama, email, password, pengalaman, biografi, pendidikan, lokasi, harga_konsultasi_chat, harga_konsultasi_video, harga_konsultasi_tatap_muka } = req.body;
+    const { nama, email, password, pengalaman, biografi, pendidikan, lokasi, foto, jenis, firma, rating, exp, harga_konsultasi_chat, harga_konsultasi_video, harga_konsultasi_tatap_muka } = req.body;
 
     try {
         const checkEmail = await Advocat.findOne({
@@ -40,6 +40,11 @@ exports.registerAdvocat = async(req, res) => {
             biografi: biografi,
             pendidikan: pendidikan,
             lokasi: lokasi,
+            foto: foto,
+            jenis: jenis,
+            firma: firma,
+            rating: rating,
+            exp: exp,
             harga_konsultasi_chat: harga_konsultasi_chat,
             harga_konsultasi_video: harga_konsultasi_video,
             harga_konsultasi_tatap_muka: harga_konsultasi_tatap_muka

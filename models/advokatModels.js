@@ -31,6 +31,21 @@ const Advokat = sequelize.define('advokat', {
     lokasi: {
         type: DataTypes.STRING,
     },
+    foto: {
+        type: DataTypes.STRING,
+    },
+    jenis: {
+        type: DataTypes.STRING,
+    },
+    firma: {
+        type: DataTypes.STRING,
+    },
+    rating: {
+        type: DataTypes.INTEGER,
+    },
+    exp: {
+        type: DataTypes.INTEGER,
+    },
     harga_konsultasi_chat: {
         type: DataTypes.INTEGER,
     },
