@@ -103,7 +103,13 @@ exports.signIn = async (req, res) => {
             expiresIn: '1h'
         });
 
-        return res.status(200).json({
+        return res.cookie('token', token, {
+            expires: new Date(Date.now() + 3600000),
+            secure: false,
+            httpOnly: true,
+        })
+        
+        .status(200).json({
             message: 'Success',
             loginResult: {
                 id: user[0].id,
@@ -123,24 +129,17 @@ exports.signIn = async (req, res) => {
 };
 
 exports.signOut = async (req, res) => {
-    const refreshToken = req.headers;
-
-    if (!refreshToken) {
-        return res.status(401).json({
-            error: 'Unauthorized'
+    try {
+        res.clearCookie('token');
+        return res.status(200).json({
+            status: 'Success',
+            message: 'Logout berhasil'
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            status: 'Failed',
+            message: 'Internal server error'
         });
     }
-    
-    const userSignOut = await User.update(
-        { refresh_token: null },
-        {
-            where: {
-                refresh_token: refreshToken,
-            },
-        }
-    );
-    if(userSignOut) return res.status(200).json({
-        status: 'Success',
-        message: 'Anda berhasil logout'
-    })
 };
