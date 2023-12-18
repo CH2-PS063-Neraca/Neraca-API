@@ -30,6 +30,9 @@ const User = sequelize.define('users', {
     phone: {
         type: DataTypes.STRING,
     },
+    foto: {
+        type: DataTypes.STRING,
+    },
 });
 
 

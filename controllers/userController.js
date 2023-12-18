@@ -28,7 +28,7 @@ exports.getUserProfile = async (req, res) => {
    try {
     const user = await User.findOne({
         where: { id: id },
-        attributes: ['email', 'phone']
+        attributes: ['email', 'phone', 'foto']
     });
     if (!user) {
         return res.status(401).send({
