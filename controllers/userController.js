@@ -10,7 +10,7 @@ require('dotenv').config();
 exports.getUsers = async (req, res) => {
     try {
         const users = await User.findAll({
-            attributes: ['id', 'username', 'email'],
+            attributes: ['id', 'username', 'email', 'foto', 'phone'],
         });
         res.send(users);
     } catch (error) {
